@@ -70,6 +70,9 @@ navLinks.forEach((link) => {
       return;
     }
 
+    if (isLifePage) {
+      armInitialLifeTarget(targetId, 1800);
+    }
     event.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
     history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -106,6 +109,36 @@ function clearHashFromUrl() {
   history.replaceState(null, "", window.location.pathname + window.location.search);
 }
 
+let initialLifeTargetId = null;
+let initialLifeTargetDeadline = 0;
+
+function armInitialLifeTarget(id, durationMs = 5000) {
+  if (!id) {
+    return;
+  }
+  initialLifeTargetId = id;
+  initialLifeTargetDeadline = Date.now() + durationMs;
+}
+
+function disarmInitialLifeTarget() {
+  initialLifeTargetId = null;
+  initialLifeTargetDeadline = 0;
+}
+
+function syncInitialLifeTarget(behavior = "auto") {
+  if (!initialLifeTargetId) {
+    return;
+  }
+  if (Date.now() > initialLifeTargetDeadline) {
+    disarmInitialLifeTarget();
+    return;
+  }
+  if (scrollToSectionWithOffset(initialLifeTargetId, behavior)) {
+    setActiveById(initialLifeTargetId);
+  }
+  clearHashFromUrl();
+}
+
 const isLifePage = /(^|\/)life\.html$/i.test(window.location.pathname);
 if (isLifePage) {
   let pendingTarget = null;
@@ -119,17 +152,19 @@ if (isLifePage) {
   const hashTarget = window.location.hash ? window.location.hash.slice(1) : null;
   const initialTarget = pendingTarget || hashTarget;
   if (initialTarget) {
-    // Scroll once after DOM is ready and once after full asset load to absorb image layout shift.
+    armInitialLifeTarget(initialTarget, 5500);
+    // Scroll once after DOM is ready, then keep aligning briefly while images/layout settle.
     requestAnimationFrame(() => {
-      if (scrollToSectionWithOffset(initialTarget, "auto")) {
-        setActiveById(initialTarget);
-      }
-      clearHashFromUrl();
+      syncInitialLifeTarget("auto");
     });
     window.addEventListener("load", () => {
-      scrollToSectionWithOffset(initialTarget, "smooth");
-      setActiveById(initialTarget);
-      clearHashFromUrl();
+      syncInitialLifeTarget("auto");
+      setTimeout(() => syncInitialLifeTarget("auto"), 220);
+      setTimeout(() => syncInitialLifeTarget("auto"), 650);
+      setTimeout(() => {
+        syncInitialLifeTarget("smooth");
+        disarmInitialLifeTarget();
+      }, 1200);
     });
   }
 }
@@ -176,9 +211,20 @@ function optimizeGalleryImageLoading() {
     return;
   }
 
-  const eagerCount = 3;
+  const eagerImages = new Set();
+  if (isLifePage && initialLifeTargetId) {
+    const targetOrder = ["hiking", "photo", "concert"];
+    const targetIndex = targetOrder.indexOf(initialLifeTargetId);
+    if (targetIndex >= 0) {
+      targetOrder.slice(0, targetIndex + 1).forEach((id) => {
+        document.querySelectorAll(`#${id} img`).forEach((img) => eagerImages.add(img));
+      });
+    }
+  }
+
+  const eagerCount = eagerImages.size > 0 ? 0 : 3;
   galleryImages.forEach((img, index) => {
-    const isEager = index < eagerCount;
+    const isEager = eagerImages.has(img) || index < eagerCount;
     img.loading = isEager ? "eager" : "lazy";
     img.decoding = "async";
     if ("fetchPriority" in img) {
@@ -393,6 +439,7 @@ function scheduleConcertLayout() {
   concertLayoutTimer = setTimeout(() => {
     concertGalleries.forEach((gallery) => layoutConcertMasonry(gallery));
     updateConcertCollapsibleState();
+    syncInitialLifeTarget("auto");
   }, 80);
 }
 
