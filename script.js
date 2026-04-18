@@ -1,6 +1,7 @@
 const sidebarToggle = document.querySelector(".sidebar-toggle");
 const sidebarFab = document.querySelector(".sidebar-fab");
 const isMobile = () => window.matchMedia("(max-width: 860px)").matches;
+const LIFE_TARGET_KEY = "lifeTargetSection";
 
 const toggleSidebar = () => {
   if (isMobile()) {
@@ -17,6 +18,21 @@ if (sidebarToggle) {
 if (sidebarFab) {
   sidebarFab.addEventListener("click", toggleSidebar);
 }
+
+const lifePreviewLinks = [...document.querySelectorAll("[data-life-target]")];
+lifePreviewLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    const targetId = link.getAttribute("data-life-target");
+    if (!targetId) {
+      return;
+    }
+    try {
+      sessionStorage.setItem(LIFE_TARGET_KEY, targetId);
+    } catch (_error) {
+      // Ignore storage errors in strict/private browser modes.
+    }
+  });
+});
 
 const revealItems = document.querySelectorAll(".reveal");
 if ("IntersectionObserver" in window) {
@@ -74,6 +90,48 @@ function setActiveById(id) {
     const active = link.getAttribute("href") === `#${id}`;
     link.classList.toggle("active", active);
   });
+}
+
+function scrollToSectionWithOffset(id, behavior = "smooth") {
+  const target = document.getElementById(id);
+  if (!target) {
+    return false;
+  }
+  const top = target.getBoundingClientRect().top + window.scrollY - 18;
+  window.scrollTo({ top, behavior });
+  return true;
+}
+
+function clearHashFromUrl() {
+  history.replaceState(null, "", window.location.pathname + window.location.search);
+}
+
+const isLifePage = /(^|\/)life\.html$/i.test(window.location.pathname);
+if (isLifePage) {
+  let pendingTarget = null;
+  try {
+    pendingTarget = sessionStorage.getItem(LIFE_TARGET_KEY);
+    sessionStorage.removeItem(LIFE_TARGET_KEY);
+  } catch (_error) {
+    pendingTarget = null;
+  }
+
+  const hashTarget = window.location.hash ? window.location.hash.slice(1) : null;
+  const initialTarget = pendingTarget || hashTarget;
+  if (initialTarget) {
+    // Scroll once after DOM is ready and once after full asset load to absorb image layout shift.
+    requestAnimationFrame(() => {
+      if (scrollToSectionWithOffset(initialTarget, "auto")) {
+        setActiveById(initialTarget);
+      }
+      clearHashFromUrl();
+    });
+    window.addEventListener("load", () => {
+      scrollToSectionWithOffset(initialTarget, "smooth");
+      setActiveById(initialTarget);
+      clearHashFromUrl();
+    });
+  }
 }
 
 if (window.location.hash) {
