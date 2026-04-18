@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Publications | Hongfei WU</title>
+    <meta
+      name="description"
+      content="Publication list of Hongfei WU, including papers, software, and preprints."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <a class="brand" href="./index.html">Hongfei WU</a>
+        <button class="sidebar-toggle" aria-label="Hide or show sidebar">⟨</button>
+      </div>
+      <ul class="side-links">
+        <li><a class="side-link" href="./index.html#about">⬅️ Back to Home</a></li>
+        <li><a class="side-link" href="#overview">Overview</a></li>
+        <li><a class="side-link" href="#featured">Featured Work</a></li>
+        <li><a class="side-link" href="#selected">Selected Publications</a></li>
+        <li><a class="side-link" href="#software">Software & Code</a></li>
+        <li><a class="side-link" href="#notes">Notes</a></li>
+      </ul>
+    </aside>
+    <button class="sidebar-fab" aria-label="Toggle sidebar">☰</button>
+
+    <main class="page-content">
+      <section id="overview" class="section reveal publication-hero">
+        <p class="publication-label">Research Output</p>
+        <h2>Publications</h2>
+        <p class="publication-hero-intro">
+          This page collects my recent papers and software outputs in machine learning.
+          I focus on optimization and scalable implementations for practical learning systems.
+        </p>
+        <div class="publication-kpis">
+          <article class="publication-kpi-card">
+            <p class="publication-kpi-value">01</p>
+            <p class="publication-kpi-label">Preprint</p>
+          </article>
+          <article class="publication-kpi-card">
+            <p class="publication-kpi-value">01</p>
+            <p class="publication-kpi-label">Open-source Package</p>
+          </article>
+          <article class="publication-kpi-card">
+            <p class="publication-kpi-value">2025</p>
+            <p class="publication-kpi-label">Latest Update</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="featured" class="section reveal">
+        <h2>Featured Work</h2>
+        <article class="publication-item featured-publication">
+          <a
+            class="pub-thumb-link"
+            href="https://arxiv.org/abs/2406.02350"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open paper page"
+          >
+            <img
+              class="pub-thumb"
+              src="./assets/ConvexClusterSolver.jpg"
+              alt="Paper preview image"
+            />
+          </a>
+          <div class="pub-body">
+            <p class="pub-title">
+              PyClustrPath: An efficient Python package for generating clustering paths
+              with GPU acceleration
+            </p>
+            <p class="pub-meta">
+              <strong>Hongfei Wu<sup>†</sup></strong>, Yancheng Yuan<sup>‡</sup>
+            </p>
+            <p class="pub-venue">
+              arXiv preprint,
+              <a href="https://arxiv.org/abs/2406.02350" target="_blank" rel="noopener noreferrer"
+                >arXiv:2406.02350</a
+              >
+              , 2025
+            </p>
+            <p class="pub-summary">
+              A Python package with GPU acceleration for convex clustering path generation,
+              designed for reproducible and efficient large-scale experiments.
+            </p>
+            <p class="pub-links">
+              <a href="https://arxiv.org/abs/2406.02350" target="_blank" rel="noopener noreferrer"
+                >[Paper]</a
+              >
+              <a
+                href="https://github.com/D3IntOpt/PyClustrPath"
+                target="_blank"
+                rel="noopener noreferrer"
+                >[Code]</a
+              >
+              <a href="https://pypi.org/project/pyclustrpath/" target="_blank" rel="noopener noreferrer"
+                >[PyPI]</a
+              >
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section id="selected" class="section reveal">
+        <h2>Selected Publications</h2>
+        <ol class="publication-list publication-list-stacked">
+          <li>
+            <article class="publication-record">
+              <p class="publication-year">2025</p>
+              <div>
+                <p class="pub-title">
+                  PyClustrPath: An efficient Python package for generating clustering paths
+                  with GPU acceleration
+                </p>
+                <p class="pub-meta">
+                  <strong>Hongfei Wu<sup>†</sup></strong>, Yancheng Yuan<sup>‡</sup>
+                </p>
+                <p class="pub-venue">
+                  arXiv preprint,
+                  <a
+                    href="https://arxiv.org/abs/2406.02350"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >arXiv:2406.02350</a
+                  >
+                </p>
+              </div>
+            </article>
+          </li>
+        </ol>
+      </section>
+
+      <section id="software" class="section reveal">
+        <h2>Software & Code</h2>
+        <div class="cards publication-software-cards">
+          <article class="card">
+            <h3>PyClustrPath</h3>
+            <p>
+              GPU-accelerated convex clustering path solver in Python for research and teaching use.
+            </p>
+            <p class="pub-links">
+              <a href="https://github.com/D3IntOpt/PyClustrPath" target="_blank" rel="noopener noreferrer"
+                >[GitHub]</a
+              >
+              <a href="https://pypi.org/project/pyclustrpath/" target="_blank" rel="noopener noreferrer"
+                >[PyPI]</a
+              >
+            </p>
+          </article>
+        </div>
+      </section>
+
+      
+
+      <section id="notes" class="section reveal">
+        <h2>Notes</h2>
+        <ul class="news-list">
+          <li><time datetime="2025-01">2025.01</time> PyClustrPath package released.</li>
+          <li><time datetime="2024-06">2024.06</time> First public preprint uploaded to arXiv.</li>
+        </ul>
+      </section>
+
+      <footer class="section footer reveal">
+        <p>© 2026 Hongfei WU. Last updated in April 2026.</p>
+      </footer>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
