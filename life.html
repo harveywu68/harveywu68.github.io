@@ -15,6 +15,68 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+     <style>
+      .lang-toggle-btn {
+        position: absolute;
+        top: 0.45rem;
+        right: 0.45rem;
+        z-index: 80;
+        border: 1px solid rgba(12, 32, 60, 0.32);
+        background: #fff8e8;
+        color: #0c203c;
+        border-radius: 999px;
+        padding: 0.62rem 1rem;
+        font-size: 0.95rem;
+        font-weight: 800;
+        letter-spacing: 0.03em;
+        cursor: pointer;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+      }
+      .lang-toggle-btn:hover {
+        background: #fff3d6;
+      }
+      .performer-link {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 0.14em;
+      }
+      .performer-link:hover {
+        opacity: 0.82;
+      }
+      #hiking.section,
+      #photo.section,
+      #concert.section {
+        padding: 0.76rem;
+      }
+      #hiking .life-section-intro,
+      #photo .life-section-intro,
+      #concert .life-section-intro {
+        margin-bottom: 0.32rem;
+      }
+      #hiking .life-groups,
+      #photo .life-groups,
+      #concert .life-groups {
+        gap: 0.32rem;
+      }
+      #hiking .life-group,
+      #photo .life-group,
+      #concert .life-group {
+        padding: 0.52rem;
+        border: 2px solid rgba(128, 97, 68, 0.46);
+        border-radius: 14px;
+        background: linear-gradient(180deg, rgba(255, 252, 247, 0.98) 0%, rgba(251, 244, 235, 0.97) 100%);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.75) inset,
+          0 8px 16px rgba(31, 42, 55, 0.08);
+      }
+      #hiking .life-group-head,
+      #photo .life-group-head,
+      #concert .life-group-head {
+        border-bottom: 1px solid rgba(128, 97, 68, 0.24);
+        padding-bottom: 0.28rem;
+        margin-bottom: 0.5rem;
+      }
+    </style>
   </head>
   <body>
     <aside class="sidebar">
