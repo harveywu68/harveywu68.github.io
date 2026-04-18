@@ -56,7 +56,7 @@ navLinks.forEach((link) => {
 
     event.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
-    history.replaceState(null, "", hash);
+    history.replaceState(null, "", window.location.pathname + window.location.search);
     setActiveById(targetId);
   });
 });

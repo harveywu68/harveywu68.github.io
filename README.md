@@ -1,24 +1,19 @@
-# Personal Academic Website
+<!-- # Hi, I'm Hongfei (Harvey) Wu -->
+![Typing Banner](https://readme-typing-svg.demolab.com?font=Fira+Code&duration=2300&pause=900&color=3EB489&width=800&lines=Hi%2C+I%27m+Harvey+(Hongfei).;PhD+Student+at+PolyU+(DSAI+%26+AMA);Imbalanced+Learning+%7C+Anomaly+Detection+%7C+Reinforcement+Learning)
 
-An academic-style personal website template for a Data Science & AI PhD student,
-designed to feel professional without being too formal.
+I am a PhD student at [The Hong Kong Polytechnic University (PolyU)](https://www.polyu.edu.hk/).  
 
-## File Structure
+## Snapshot
 
-- `index.html`: homepage content and section layout
-- `life.html`: dedicated page for personal life details
-- `styles.css`: visual style, responsive layout, and animations
-- `script.js`: mobile menu toggle and reveal-on-scroll behavior
-- `assets/profile-photo.svg`: placeholder portrait image
+- `Now`: A PhD student in Data Science & AI, PolyU (2024-present)
+- `Focus`: Imbalanced Learning, Anomaly Detection, Reinforcement Learning
+- `Recent work`: [PyClustrPath](https://github.com/D3IntOpt/PyClustrPath) (GPU-accelerated convex clustering path solver)
+- `Previously`: Research Assistant in AMA, PolyU; M.Sc. with Distinction
 
-## Local Preview
+<details>
+<summary><b>Outside research</b></summary>
 
-Open `index.html` directly in a browser, or run any static file server.
-
-## First Things To Replace
-
-- Name, university, email, and lab affiliation
-- Publication entries in `Selected Publications`
-- Timeline entries in `News`
-- External links in the footer (Scholar / GitHub / LinkedIn)
-- `assets/profile-photo.svg` with your own photo
+- 🥾 Hiking
+- 📷 Photography
+- 🎵 Concerts for energy
+</details>
