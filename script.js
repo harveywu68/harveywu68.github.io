@@ -212,6 +212,7 @@ let touchStartX = null;
 let touchStartY = null;
 let touchDeltaX = 0;
 let touchGestureMode = null;
+let lightboxAnimating = false;
 
 function optimizeGalleryImageLoading() {
   if (galleryImages.length === 0) {
@@ -254,6 +255,7 @@ const closeLightbox = () => {
   document.body.style.overflow = "";
   lightboxOrderedButtons = [];
   lightboxCurrentIndex = -1;
+  lightboxAnimating = false;
   const hint = lightbox.querySelector(".lightbox-end-hint");
   if (hint) {
     hint.classList.remove("is-visible");
@@ -269,7 +271,7 @@ function getLightboxEndHintText() {
   if (lang.startsWith("zh")) {
     return "到底啦，看看其他内容吧 🫶 ～";
   }
-  return "You've reached the end. Explore more on the page ~";
+  return "You've reached the end. Explore more on the page 🫶 ~";
 }
 
 function showLightboxEndHint() {
@@ -363,6 +365,9 @@ function openLightboxAt(button) {
 }
 
 function stepLightbox(offset) {
+  if (lightboxAnimating) {
+    return;
+  }
   if (!lightbox.classList.contains("is-open") || lightboxOrderedButtons.length === 0) {
     return;
   }
@@ -377,6 +382,60 @@ function stepLightbox(offset) {
   }
   lightboxCurrentIndex = nextIndex;
   renderLightboxFromButton(lightboxOrderedButtons[nextIndex]);
+}
+
+function animateStepLightbox(offset) {
+  if (lightboxAnimating) {
+    return;
+  }
+  if (!lightbox.classList.contains("is-open") || lightboxOrderedButtons.length === 0 || !lightboxImage) {
+    return;
+  }
+
+  const total = lightboxOrderedButtons.length;
+  const nextIndex = lightboxCurrentIndex + offset;
+  if (nextIndex >= total) {
+    showLightboxEndHint();
+    resetLightboxSwipeVisual(true);
+    return;
+  }
+  if (nextIndex < 0) {
+    resetLightboxSwipeVisual(true);
+    return;
+  }
+
+  lightboxAnimating = true;
+  const outgoingX =
+    offset > 0
+      ? -Math.min(window.innerWidth * 0.5, 360)
+      : Math.min(window.innerWidth * 0.5, 360);
+  const incomingX =
+    offset > 0
+      ? Math.min(window.innerWidth * 0.2, 130)
+      : -Math.min(window.innerWidth * 0.2, 130);
+
+  // 1) Current image slides out.
+  lightboxImage.style.transition = "transform 0.2s ease, opacity 0.2s ease";
+  lightboxImage.style.transform = `translateX(${outgoingX}px)`;
+  lightboxImage.style.opacity = "0.42";
+
+  setTimeout(() => {
+    // 2) Swap image and make next image slide in from the opposite side.
+    lightboxCurrentIndex = nextIndex;
+    renderLightboxFromButton(lightboxOrderedButtons[nextIndex]);
+    lightboxImage.style.transition = "none";
+    lightboxImage.style.transform = `translateX(${incomingX}px)`;
+    lightboxImage.style.opacity = "0.72";
+
+    requestAnimationFrame(() => {
+      lightboxImage.style.transition = "transform 0.22s ease, opacity 0.22s ease";
+      lightboxImage.style.transform = "translateX(0)";
+      lightboxImage.style.opacity = "1";
+      setTimeout(() => {
+        lightboxAnimating = false;
+      }, 220);
+    });
+  }, 190);
 }
 
 function applyLightboxSwipeVisual(deltaX) {
@@ -535,28 +594,11 @@ if (lightbox && lightboxImage && lightboxCaption) {
       }
 
       if (deltaX < 0) {
-        if (lightboxCurrentIndex >= lightboxOrderedButtons.length - 1) {
-          showLightboxEndHint();
-          resetLightboxSwipeVisual(true);
-          return;
-        }
-        lightboxImage.style.transition = "transform 0.16s ease, opacity 0.16s ease";
-        applyLightboxSwipeVisual(Math.min(touchDeltaX, -window.innerWidth * 0.34));
-        setTimeout(() => {
-          stepLightbox(1);
-          resetLightboxSwipeVisual(false);
-        }, 160);
+        applyLightboxSwipeVisual(Math.min(touchDeltaX, -window.innerWidth * 0.36));
+        animateStepLightbox(1);
       } else {
-        if (lightboxCurrentIndex <= 0) {
-          resetLightboxSwipeVisual(true);
-          return;
-        }
-        lightboxImage.style.transition = "transform 0.16s ease, opacity 0.16s ease";
-        applyLightboxSwipeVisual(Math.max(touchDeltaX, window.innerWidth * 0.34));
-        setTimeout(() => {
-          stepLightbox(-1);
-          resetLightboxSwipeVisual(false);
-        }, 160);
+        applyLightboxSwipeVisual(Math.max(touchDeltaX, window.innerWidth * 0.36));
+        animateStepLightbox(-1);
       }
     },
     { passive: true }
