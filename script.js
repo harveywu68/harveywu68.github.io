@@ -210,6 +210,8 @@ let lightboxCurrentIndex = -1;
 let lightboxEndHintTimer = null;
 let touchStartX = null;
 let touchStartY = null;
+let touchDeltaX = 0;
+let touchGestureMode = null;
 
 function optimizeGalleryImageLoading() {
   if (galleryImages.length === 0) {
@@ -342,6 +344,9 @@ function renderLightboxFromButton(button) {
   lightboxImage.src = src;
   lightboxImage.alt = alt;
   lightboxCaption.textContent = caption;
+  lightboxImage.style.transition = "";
+  lightboxImage.style.transform = "translateX(0)";
+  lightboxImage.style.opacity = "1";
 }
 
 function openLightboxAt(button) {
@@ -372,6 +377,24 @@ function stepLightbox(offset) {
   }
   lightboxCurrentIndex = nextIndex;
   renderLightboxFromButton(lightboxOrderedButtons[nextIndex]);
+}
+
+function applyLightboxSwipeVisual(deltaX) {
+  if (!lightboxImage) {
+    return;
+  }
+  const fade = Math.max(0.65, 1 - Math.min(Math.abs(deltaX) / 380, 0.35));
+  lightboxImage.style.transform = `translateX(${deltaX}px)`;
+  lightboxImage.style.opacity = `${fade}`;
+}
+
+function resetLightboxSwipeVisual(withTransition = true) {
+  if (!lightboxImage) {
+    return;
+  }
+  lightboxImage.style.transition = withTransition ? "transform 0.18s ease, opacity 0.18s ease" : "";
+  lightboxImage.style.transform = "translateX(0)";
+  lightboxImage.style.opacity = "1";
 }
 
 if (lightbox && lightboxImage && lightboxCaption) {
@@ -441,8 +464,46 @@ if (lightbox && lightboxImage && lightboxCaption) {
       }
       touchStartX = touch.clientX;
       touchStartY = touch.clientY;
+      touchDeltaX = 0;
+      touchGestureMode = null;
+      resetLightboxSwipeVisual(false);
     },
     { passive: true }
+  );
+
+  lightbox.addEventListener(
+    "touchmove",
+    (event) => {
+      if (!lightbox.classList.contains("is-open") || touchStartX === null || touchStartY === null) {
+        return;
+      }
+      const touch = event.touches && event.touches[0];
+      if (!touch) {
+        return;
+      }
+
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
+
+      if (!touchGestureMode) {
+        if (absX > 8 || absY > 8) {
+          touchGestureMode = absX > absY * 1.1 ? "horizontal" : "vertical";
+        } else {
+          return;
+        }
+      }
+
+      if (touchGestureMode !== "horizontal") {
+        return;
+      }
+
+      event.preventDefault();
+      touchDeltaX = deltaX;
+      applyLightboxSwipeVisual(deltaX);
+    },
+    { passive: false }
   );
 
   lightbox.addEventListener(
@@ -465,16 +526,37 @@ if (lightbox && lightboxImage && lightboxCaption) {
 
       touchStartX = null;
       touchStartY = null;
+      touchGestureMode = null;
 
       // Horizontal swipe only: avoid triggering on vertical scroll gestures.
       if (absX < 36 || absX < absY * 1.25) {
+        resetLightboxSwipeVisual(true);
         return;
       }
 
       if (deltaX < 0) {
-        stepLightbox(1);
+        if (lightboxCurrentIndex >= lightboxOrderedButtons.length - 1) {
+          showLightboxEndHint();
+          resetLightboxSwipeVisual(true);
+          return;
+        }
+        lightboxImage.style.transition = "transform 0.16s ease, opacity 0.16s ease";
+        applyLightboxSwipeVisual(Math.min(touchDeltaX, -window.innerWidth * 0.34));
+        setTimeout(() => {
+          stepLightbox(1);
+          resetLightboxSwipeVisual(false);
+        }, 160);
       } else {
-        stepLightbox(-1);
+        if (lightboxCurrentIndex <= 0) {
+          resetLightboxSwipeVisual(true);
+          return;
+        }
+        lightboxImage.style.transition = "transform 0.16s ease, opacity 0.16s ease";
+        applyLightboxSwipeVisual(Math.max(touchDeltaX, window.innerWidth * 0.34));
+        setTimeout(() => {
+          stepLightbox(-1);
+          resetLightboxSwipeVisual(false);
+        }, 160);
       }
     },
     { passive: true }
