@@ -112,6 +112,7 @@ const lightboxCaption = document.querySelector(".lightbox-caption");
 const lightboxClose = document.querySelector(".lightbox-close");
 const galleryButtons = document.querySelectorAll(".gallery-open");
 const galleryImages = [...document.querySelectorAll(".gallery-open img")];
+const lifePreviewImages = [...document.querySelectorAll(".life-preview-images img")];
 
 function optimizeGalleryImageLoading() {
   if (galleryImages.length === 0) {
@@ -130,6 +131,22 @@ function optimizeGalleryImageLoading() {
 }
 
 optimizeGalleryImageLoading();
+
+function optimizeLifePreviewImageLoading() {
+  if (lifePreviewImages.length === 0) {
+    return;
+  }
+
+  lifePreviewImages.forEach((img) => {
+    img.loading = "lazy";
+    img.decoding = "async";
+    if ("fetchPriority" in img) {
+      img.fetchPriority = "low";
+    }
+  });
+}
+
+optimizeLifePreviewImageLoading();
 
 const closeLightbox = () => {
   if (!lightbox || !lightboxImage || !lightboxCaption) {
