@@ -1363,8 +1363,42 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .life-group {
+    padding: 0.72rem;
+  }
+
+  .concert-group {
+    padding: 0.68rem;
+  }
+
   .concert-group .life-group-head {
     align-items: flex-start;
+    margin-bottom: 0.56rem;
+    gap: 0.38rem;
+  }
+
+  .concert-gallery {
+    width: 100%;
+  }
+
+  .concert-gallery .gallery-card {
+    padding: 0.08rem;
+    border-width: 0.5px;
+    border-radius: 11px;
+    box-shadow:
+      0 4px 10px rgba(31, 42, 55, 0.05),
+      0 8px 16px rgba(31, 42, 55, 0.06);
+  }
+
+  .concert-gallery .gallery-card::before {
+    inset: 0.08rem;
+    border-width: 0.5px;
+    border-radius: 9px;
+  }
+
+  .concert-gallery .gallery-open img {
+    border-width: 0.5px;
+    border-radius: 8px;
   }
 
   .life-preview-images {

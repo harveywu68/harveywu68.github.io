@@ -378,7 +378,9 @@ function layoutConcertMasonry(gallery) {
   }
 
   const columns = getConcertColumns(gallery);
-  const gap = 6;
+  const mobileNarrow = window.matchMedia("(max-width: 640px)").matches;
+  const mobile = window.matchMedia("(max-width: 860px)").matches;
+  const gap = mobileNarrow ? 2 : mobile ? 4 : 6;
   const columnWidth = (gallery.clientWidth - gap * (columns - 1)) / columns;
   if (columnWidth <= 0) {
     return;
