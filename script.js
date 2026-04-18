@@ -285,14 +285,37 @@ if (lightbox && lightboxImage && lightboxCaption) {
 const concertGalleries = [...document.querySelectorAll(".concert-gallery")];
 const concertGroups = [...document.querySelectorAll(".concert-group")];
 const collapsedConcertHeight = 520;
-const concertToggleText = {
-  collapsed: "Show more",
-  expanded: "Show less"
+const concertToggleTextMap = {
+  en: {
+    collapsed: "Show more",
+    expanded: "Show less"
+  },
+  zh: {
+    collapsed: "显示更多",
+    expanded: "收起"
+  }
 };
 
+function getConcertToggleText() {
+  const lang = (document.documentElement.lang || "").toLowerCase();
+  return lang.startsWith("zh") ? concertToggleTextMap.zh : concertToggleTextMap.en;
+}
+
 function setConcertToggleState(toggle, expanded) {
-  toggle.textContent = expanded ? concertToggleText.expanded : concertToggleText.collapsed;
+  const text = getConcertToggleText();
+  toggle.textContent = expanded ? text.expanded : text.collapsed;
   toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+}
+
+function refreshConcertToggleLabels() {
+  concertGroups.forEach((group) => {
+    const toggle = group.querySelector(".concert-toggle");
+    if (!toggle || toggle.hidden) {
+      return;
+    }
+    const expanded = group.classList.contains("is-expanded");
+    setConcertToggleState(toggle, expanded);
+  });
 }
 
 function ensureConcertToggle(group) {
@@ -355,7 +378,7 @@ function layoutConcertMasonry(gallery) {
   }
 
   const columns = getConcertColumns(gallery);
-  const gap = 14;
+  const gap = 6;
   const columnWidth = (gallery.clientWidth - gap * (columns - 1)) / columns;
   if (columnWidth <= 0) {
     return;
@@ -457,4 +480,14 @@ if (concertGalleries.length > 0) {
   });
 
   scheduleConcertLayout();
+
+  if ("MutationObserver" in window) {
+    const langObserver = new MutationObserver(() => {
+      refreshConcertToggleLabels();
+    });
+    langObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["lang"]
+    });
+  }
 }

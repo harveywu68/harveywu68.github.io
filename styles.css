@@ -950,7 +950,102 @@ h2 {
 
 .concert-group .life-group-meta {
   margin: 0;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 0.18rem;
+  row-gap: 0.1rem;
+  white-space: normal;
+}
+
+.concert-group .life-group-meta .meta-sep {
+  margin-inline: 0;
+}
+
+.concert-group .life-group-meta .meta-sep-dot {
+  margin-inline: 0.48rem;
+}
+
+.concert-group .life-group-meta .meta-sep-comma {
+  margin-inline: 0.06rem 0.1rem;
+}
+
+.concert-series-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  padding: 0.1rem 0.36rem;
+  margin-left: 0.32rem;
+  border-radius: 999px;
+  border: 1px solid rgba(179, 118, 72, 0.5);
+  background: rgba(247, 231, 217, 0.72);
+  color: #8c4a28;
+  font-size: 0.74em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  vertical-align: middle;
+}
+
+.concert-group .life-group-meta .meta-link {
+  color: #1e4f87;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+.concert-group .life-group-meta .meta-link:hover {
+  color: #12355e;
+}
+
+.concert-group .life-group-meta .meta-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--muted);
+}
+
+.concert-group .life-group-meta .meta-time-icon {
+  display: inline-flex;
+  width: 0.92em;
+  height: 0.92em;
+  line-height: 1;
+}
+
+.concert-group .life-group-meta .meta-time-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.concert-group .life-group-meta .meta-venue-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18rem;
+}
+
+.concert-group .life-group-meta .meta-location-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.concert-group .life-group-meta .meta-map-icon {
+  display: inline-flex;
+  width: 0.95em;
+  height: 0.95em;
+  line-height: 1;
+}
+
+.concert-group .life-group-meta .meta-map-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
 }
 
 .concert-gallery {
