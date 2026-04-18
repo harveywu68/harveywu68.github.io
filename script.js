@@ -111,6 +111,25 @@ const lightboxImage = document.querySelector(".lightbox-image");
 const lightboxCaption = document.querySelector(".lightbox-caption");
 const lightboxClose = document.querySelector(".lightbox-close");
 const galleryButtons = document.querySelectorAll(".gallery-open");
+const galleryImages = [...document.querySelectorAll(".gallery-open img")];
+
+function optimizeGalleryImageLoading() {
+  if (galleryImages.length === 0) {
+    return;
+  }
+
+  const eagerCount = 3;
+  galleryImages.forEach((img, index) => {
+    const isEager = index < eagerCount;
+    img.loading = isEager ? "eager" : "lazy";
+    img.decoding = "async";
+    if ("fetchPriority" in img) {
+      img.fetchPriority = isEager ? "high" : "low";
+    }
+  });
+}
+
+optimizeGalleryImageLoading();
 
 const closeLightbox = () => {
   if (!lightbox || !lightboxImage || !lightboxCaption) {
