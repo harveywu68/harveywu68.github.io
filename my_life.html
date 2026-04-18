@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="./styles.css" />
     <style>
       .lang-toggle-btn {
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        z-index: 2200;
+        position: absolute;
+        top: 0.45rem;
+        right: 0.45rem;
+        z-index: 80;
         border: 1px solid rgba(12, 32, 60, 0.32);
         background: #fff8e8;
         color: #0c203c;
@@ -34,12 +34,6 @@
       }
       .lang-toggle-btn:hover {
         background: #fff3d6;
-      }
-      @media (max-width: 720px) {
-        .lang-toggle-btn {
-          top: 0.75rem;
-          right: 0.75rem;
-        }
       }
       .performer-link {
         color: inherit;
