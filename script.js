@@ -232,12 +232,25 @@ function optimizeGalleryImageLoading() {
 
   const eagerCount = eagerImages.size > 0 ? 0 : 3;
   galleryImages.forEach((img, index) => {
-    const isEager = eagerImages.has(img) || index < eagerCount;
+    const inConcertSection = Boolean(img.closest("#concert"));
+    const isEager = inConcertSection || eagerImages.has(img) || index < eagerCount;
+    if (!img.complete || !img.naturalWidth) {
+      img.classList.add("is-pending");
+    } else {
+      img.classList.remove("is-pending");
+    }
     img.loading = isEager ? "eager" : "lazy";
     img.decoding = "async";
     if ("fetchPriority" in img) {
       img.fetchPriority = isEager ? "high" : "low";
     }
+
+    img.addEventListener("load", () => {
+      img.classList.remove("is-pending");
+    });
+    img.addEventListener("error", () => {
+      img.classList.remove("is-pending");
+    });
   });
 }
 
@@ -608,6 +621,7 @@ if (lightbox && lightboxImage && lightboxCaption) {
 const concertGalleries = [...document.querySelectorAll(".concert-gallery")];
 const concertGroups = [...document.querySelectorAll(".concert-group")];
 const collapsedConcertHeight = 520;
+let hasRevealedConcertGalleries = false;
 const concertToggleTextMap = {
   en: {
     collapsed: "Show more",
@@ -791,7 +805,50 @@ function scheduleConcertLayout() {
   }, 80);
 }
 
+function revealConcertGalleries() {
+  if (hasRevealedConcertGalleries) {
+    return;
+  }
+  hasRevealedConcertGalleries = true;
+  concertGalleries.forEach((gallery) => {
+    gallery.classList.remove("is-layout-pending");
+    gallery.classList.add("is-layout-ready");
+  });
+}
+
+function waitForImagesReady(images, timeoutMs = 2000) {
+  if (!images || images.length === 0) {
+    return Promise.resolve();
+  }
+
+  const imageWaiters = images.map((img) => {
+    if (img.complete && img.naturalWidth > 0) {
+      return Promise.resolve();
+    }
+    return new Promise((resolve) => {
+      const done = () => {
+        img.removeEventListener("load", done);
+        img.removeEventListener("error", done);
+        resolve();
+      };
+      img.addEventListener("load", done, { once: true });
+      img.addEventListener("error", done, { once: true });
+    });
+  });
+
+  return Promise.race([
+    Promise.all(imageWaiters),
+    new Promise((resolve) => {
+      setTimeout(resolve, timeoutMs);
+    })
+  ]);
+}
+
 if (concertGalleries.length > 0) {
+  concertGalleries.forEach((gallery) => {
+    gallery.classList.add("is-layout-pending");
+  });
+
   window.addEventListener("load", scheduleConcertLayout);
   window.addEventListener("resize", scheduleConcertLayout);
   if (document.fonts && document.fonts.ready) {
@@ -805,6 +862,15 @@ if (concertGalleries.length > 0) {
   });
 
   scheduleConcertLayout();
+
+  const primaryConcertImages = [...concertGalleries[0].querySelectorAll("img")];
+  waitForImagesReady(primaryConcertImages, 2200).then(() => {
+    scheduleConcertLayout();
+    requestAnimationFrame(() => {
+      scheduleConcertLayout();
+      revealConcertGalleries();
+    });
+  });
 
   if ("MutationObserver" in window) {
     const langObserver = new MutationObserver(() => {
