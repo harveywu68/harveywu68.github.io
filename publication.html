@@ -25,10 +25,8 @@
       <ul class="side-links">
         <li><a class="side-link" href="./index.html#about">⬅️ Back to Home</a></li>
         <li><a class="side-link" href="#overview">Overview</a></li>
-        <li><a class="side-link" href="#featured">Featured Work</a></li>
-        <li><a class="side-link" href="#selected">Selected Publications</a></li>
-        <li><a class="side-link" href="#software">Software & Code</a></li>
-        <li><a class="side-link" href="#notes">Notes</a></li>
+        <li><a class="side-link" href="#articles">Articles</a></li>
+        <li><a class="side-link" href="#software">Software</a></li>
       </ul>
     </aside>
     <button class="sidebar-fab" aria-label="Toggle sidebar">☰</button>
@@ -37,101 +35,63 @@
       <section id="overview" class="section reveal publication-hero">
         <p class="publication-label">Research Output</p>
         <h2>Publications</h2>
-        <p class="publication-hero-intro">
-          This page collects my recent papers and software outputs in machine learning.
-          I focus on optimization and scalable implementations for practical learning systems.
-        </p>
-        <div class="publication-kpis">
-          <article class="publication-kpi-card">
-            <p class="publication-kpi-value">01</p>
-            <p class="publication-kpi-label">Preprint</p>
-          </article>
-          <article class="publication-kpi-card">
-            <p class="publication-kpi-value">01</p>
-            <p class="publication-kpi-label">Open-source Package</p>
-          </article>
-          <article class="publication-kpi-card">
-            <p class="publication-kpi-value">2025</p>
-            <p class="publication-kpi-label">Latest Update</p>
-          </article>
-        </div>
+        <a
+          class="scholar-button"
+          href="https://scholar.google.com/citations?user=Wrtoa8AAAAAJ&hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="pub-link-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M22 10L12 5 2 10l10 5 10-5z"></path>
+              <path d="M6 12v4.5c3.2 2.3 8.8 2.3 12 0V12"></path>
+            </svg>
+          </span>
+          <span>Google Scholar</span>
+        </a>
       </section>
 
-      <section id="featured" class="section reveal">
-        <h2>Featured Work</h2>
-        <article class="publication-item featured-publication">
-          <a
-            class="pub-thumb-link"
-            href="https://arxiv.org/abs/2406.02350"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open paper page"
-          >
-            <img
-              class="pub-thumb"
-              src="./assets/ConvexClusterSolver.jpg"
-              alt="Paper preview image"
-            />
-          </a>
-          <div class="pub-body">
-            <p class="pub-title">
-              PyClustrPath: An efficient Python package for generating clustering paths
-              with GPU acceleration
-            </p>
-            <p class="pub-meta">
-              <strong>Hongfei Wu<sup>†</sup></strong>, Yancheng Yuan<sup>‡</sup>
-            </p>
-            <p class="pub-venue">
-              arXiv preprint,
-              <a href="https://arxiv.org/abs/2406.02350" target="_blank" rel="noopener noreferrer"
-                >arXiv:2406.02350</a
-              >
-              , 2025
-            </p>
-            <p class="pub-summary">
-              A Python package with GPU acceleration for convex clustering path generation,
-              designed for reproducible and efficient large-scale experiments.
-            </p>
-            <p class="pub-links">
-              <a href="https://arxiv.org/abs/2406.02350" target="_blank" rel="noopener noreferrer"
-                >[Paper]</a
-              >
+      <section id="articles" class="section reveal">
+        <h2>Articles</h2>
+        <ol class="publication-list">
+          <li>
+            <article class="publication-item featured-publication">
               <a
-                href="https://github.com/D3IntOpt/PyClustrPath"
+                class="pub-thumb-link"
+                href="https://arxiv.org/abs/2604.25334"
                 target="_blank"
                 rel="noopener noreferrer"
-                >[Code]</a
+                aria-label="Open VAE-Inf paper page"
               >
-              <a href="https://pypi.org/project/pyclustrpath/" target="_blank" rel="noopener noreferrer"
-                >[PyPI]</a
-              >
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <section id="selected" class="section reveal">
-        <h2>Selected Publications</h2>
-        <ol class="publication-list publication-list-stacked">
-          <li>
-            <article class="publication-record">
-              <p class="publication-year">2025</p>
-              <div>
-                <p class="pub-title">
-                  PyClustrPath: An efficient Python package for generating clustering paths
-                  with GPU acceleration
-                </p>
-                <p class="pub-meta">
-                  <strong>Hongfei Wu<sup>†</sup></strong>, Yancheng Yuan<sup>‡</sup>
-                </p>
+                <img
+                  class="pub-thumb"
+                  src="./assets/pub/VAE-inf_framework.jpg"
+                  alt="VAE-Inf framework preview image"
+                />
+              </a>
+              <div class="pub-body">
+                <p class="pub-title">VAE-Inf: A statistically interpretable generative paradigm for imbalanced classification</p>
+                <p class="pub-meta"><u><strong>Hongfei Wu</strong></u>, Ruijian Han<sup>*</sup>, Yancheng Yuan<sup>*</sup></p>
                 <p class="pub-venue">
-                  arXiv preprint,
-                  <a
-                    href="https://arxiv.org/abs/2406.02350"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >arXiv:2406.02350</a
-                  >
+                  <span class="pub-tag">Under Review</span>
+                  arXiv preprint
+                  <a href="https://arxiv.org/abs/2604.25334" target="_blank" rel="noopener noreferrer">arXiv:2604.25334</a>,
+                  2026
+                </p>
+                <p class="pub-summary">
+                  A VAE-based imbalanced classification framework that learns a majority-class reference distribution and enables distribution-free calibrated inference.
+                </p>
+                <p class="pub-links">
+                  <a href="https://arxiv.org/abs/2604.25334" target="_blank" rel="noopener noreferrer">
+                    <span class="pub-link-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M6 3.8h9.5L20 8.3v11.9H6z"></path>
+                        <path d="M15.5 3.8v4.5H20"></path>
+                        <path d="M8.8 13h8.4"></path>
+                      </svg>
+                    </span>
+                    <span>[Paper]</span>
+                  </a>
                 </p>
               </div>
             </article>
@@ -140,33 +100,69 @@
       </section>
 
       <section id="software" class="section reveal">
-        <h2>Software & Code</h2>
-        <div class="cards publication-software-cards">
-          <article class="card">
-            <h3>PyClustrPath</h3>
-            <p>
-              GPU-accelerated convex clustering path solver in Python for research and teaching use.
-            </p>
-            <p class="pub-links">
-              <a href="https://github.com/D3IntOpt/PyClustrPath" target="_blank" rel="noopener noreferrer"
-                >[GitHub]</a
+        <h2>Software</h2>
+        <ol class="publication-list">
+          <li>
+            <article class="publication-item featured-publication">
+              <a
+                class="pub-thumb-link"
+                href="https://arxiv.org/abs/2406.02350"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open PyClustrPath paper page"
               >
-              <a href="https://pypi.org/project/pyclustrpath/" target="_blank" rel="noopener noreferrer"
-                >[PyPI]</a
-              >
-            </p>
-          </article>
-        </div>
-      </section>
-
-      
-
-      <section id="notes" class="section reveal">
-        <h2>Notes</h2>
-        <ul class="news-list">
-          <li><time datetime="2025-01">2025.01</time> PyClustrPath package released.</li>
-          <li><time datetime="2024-06">2024.06</time> First public preprint uploaded to arXiv.</li>
-        </ul>
+                <img
+                  class="pub-thumb"
+                  src="./assets/pub/ConvexClusterSolver.jpg"
+                  alt="PyClustrPath preview image"
+                />
+              </a>
+              <div class="pub-body">
+                <p class="pub-title">
+                  PyClustrPath: An efficient Python package for generating clustering paths
+                  with GPU acceleration
+                </p>
+                <p class="pub-meta">
+                  <u><strong>Hongfei Wu<sup>†</sup></strong></u>, Yancheng Yuan<sup>‡</sup>
+                </p>
+                <p class="pub-venue">
+                  <span class="pub-tag">Open-source Package</span>
+                  arXiv preprint
+                  <a href="https://arxiv.org/abs/2406.02350" target="_blank" rel="noopener noreferrer">arXiv:2406.02350</a>,
+                  2025
+                </p>
+                <p class="pub-summary">
+                  A Python package with GPU acceleration for convex clustering path generation,
+                  designed for reproducible and efficient large-scale experiments.
+                </p>
+                <p class="pub-links">
+                  <a href="https://arxiv.org/abs/2406.02350" target="_blank" rel="noopener noreferrer">
+                    <span class="pub-link-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M6 3.8h9.5L20 8.3v11.9H6z"></path>
+                        <path d="M15.5 3.8v4.5H20"></path>
+                        <path d="M8.8 13h8.4"></path>
+                      </svg>
+                    </span>
+                    <span>[Paper]</span>
+                  </a>
+                  <a
+                    href="https://github.com/D3IntOpt/PyClustrPath"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span class="pub-link-icon github-mark" aria-hidden="true">
+                      <svg viewBox="0 0 16 16">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                      </svg>
+                    </span>
+                    <span>[Code]</span>
+                  </a>
+                </p>
+              </div>
+            </article>
+          </li>
+        </ol>
       </section>
 
       <footer class="section footer reveal">

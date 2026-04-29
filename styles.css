@@ -536,6 +536,19 @@ h2 {
   font-style: italic;
 }
 
+.pub-tag {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.35rem;
+  padding: 0.02rem 0.28rem;
+  border-radius: 4px;
+  background: rgba(69, 82, 96, 0.08);
+  color: #66717d;
+  font-size: 0.82rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
 .pub-venue a {
   color: var(--primary);
   text-decoration: none;
@@ -623,6 +636,24 @@ h2 {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: 0.82rem;
+}
+
+.scholar-button {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.scholar-button:hover {
+  color: #3d89af;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
 }
 
 .publication-hero-intro {
