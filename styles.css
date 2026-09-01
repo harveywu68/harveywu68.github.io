@@ -483,6 +483,7 @@ h2 {
 }
 
 .publication-item {
+  --pub-label-height: 1.45rem;
   display: grid;
   grid-template-columns: clamp(140px, 20vw, 190px) minmax(0, 1fr);
   gap: 0.9rem;
@@ -490,47 +491,72 @@ h2 {
 }
 
 .pub-thumb-link {
-  position: relative;
-  display: block;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .pub-thumb-badge {
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
+  --badge-start: #112467;
+  --badge-end: #112467;
+  --badge-border: #0d1d55;
+  --badge-dot: #bfcaef;
+  --badge-ring: rgba(255, 255, 255, 0.18);
+  position: relative;
   z-index: 1;
-  padding: 0.16rem 0.48rem;
-  border-radius: 4px;
-  background: #2f6f8f;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  height: var(--pub-label-height);
+  margin: 0 0 0 0.55rem;
+  padding: 0 0.68rem;
+  border: 1px solid var(--badge-border);
+  border-bottom-width: 1px;
+  border-radius: 7px 7px 0 0;
+  background: linear-gradient(110deg, var(--badge-start), var(--badge-end));
   color: #fff;
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  box-shadow: 0 2px 6px rgba(31, 42, 55, 0.22);
+  line-height: 1;
+  letter-spacing: 0.045em;
+  box-sizing: border-box;
+  text-shadow: 0 1px 1px rgba(20, 38, 50, 0.22);
+  box-shadow: 0 -3px 10px rgba(31, 42, 55, 0.1);
+}
+
+.pub-thumb-badge::before {
+  content: "";
+  width: 0.34rem;
+  height: 0.34rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--badge-dot);
+  box-shadow: 0 0 0 2px var(--badge-ring);
 }
 
 .pub-thumb-badge-preprint {
-  background: #66717d;
+  --badge-start: #51596f;
+  --badge-end: #70778d;
+  --badge-border: rgba(69, 75, 96, 0.46);
+  --badge-dot: #efd889;
+  --badge-ring: rgba(255, 255, 255, 0.17);
 }
 
 .pub-thumb {
   width: 100%;
   /* aspect-ratio: 16 / 10; */
   object-fit: cover;
-  border: 0;
-  border-radius: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   background: #fff;
   display: block;
+  box-shadow: 0 3px 10px rgba(31, 42, 55, 0.08);
 }
 
 .pub-body {
   min-width: 0;
   /* 向右移动 */
+  padding-top: var(--pub-label-height);
   padding-right: 0.25rem;
 }
 
@@ -761,6 +787,10 @@ h2 {
 
   .pub-thumb-link {
     max-width: 280px;
+  }
+
+  .pub-body {
+    padding-top: 0;
   }
 }
 
