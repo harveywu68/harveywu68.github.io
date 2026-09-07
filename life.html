@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="./styles.css" />
      <style>
       .lang-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
         position: absolute;
         top: 0.45rem;
         right: 0.45rem;
@@ -95,6 +98,10 @@
       <!-- <a class="sidebar-life-link" href="./index.html">Back to Home ↗</a> -->
     </aside>
     <button class="sidebar-fab" aria-label="Toggle sidebar">☰</button>
+    <button id="lang-toggle" class="lang-toggle-btn" type="button" aria-label="切换为中文">
+      <img src="./assets/logo/google-translate.png" width="22" height="22" alt="" aria-hidden="true" />
+      <span>Eng/中</span>
+    </button>
 
     <main class="page-content">
       <section class="section reveal">
@@ -857,6 +864,126 @@
 
           <section class="life-group concert-group">
             <div class="life-group-head">
+              <h3><a class="performer-link" href="https://en.wikipedia.org/wiki/Silence_Wang" target="_blank" rel="noopener noreferrer">Silence Wang</a>（<a class="performer-link" href="https://baike.baidu.com/item/%E6%B1%AA%E8%8B%8F%E6%B3%B7" target="_blank" rel="noopener noreferrer">汪苏泷</a>）</h3>
+              <p class="life-group-meta">
+                <span class="meta-time">
+                  <span class="meta-time-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <rect x="4.5" y="6.5" width="15" height="13" rx="2"></rect>
+                      <path d="M8 4.5v4"></path>
+                      <path d="M16 4.5v4"></path>
+                      <path d="M4.5 10h15"></path>
+                    </svg>
+                  </span>
+                  <span>2026.09.06</span>
+                </span>
+                <span class="meta-sep meta-sep-dot">·</span>
+                <a class="meta-link meta-venue-link" href="https://maps.google.com/?q=Kai+Tak+Sports+Park" target="_blank" rel="noopener noreferrer">
+                  <span class="meta-map-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"></path>
+                      <circle cx="12" cy="10" r="2.3"></circle>
+                    </svg>
+                  </span>
+                  Kai Tak Sports Park
+                </a>
+                <span class="meta-sep meta-sep-comma">,</span>
+                <a class="meta-link meta-location-link" href="https://maps.google.com/?q=Hong+Kong" target="_blank" rel="noopener noreferrer">Hong Kong</a>
+              </p>
+            </div>
+            <div class="life-gallery concert-gallery">
+              <figure class="gallery-card">
+                <button
+                  class="gallery-open"
+                  type="button"
+                  data-lightbox-src="./assets/concert/Silence_wang/WSL_01.jpeg"
+                  data-lightbox-alt="Silence Wang concert moment 01"
+                >
+                  <img loading="lazy" decoding="async" src="./assets/concert/Silence_wang/WSL_01.jpeg" alt="Silence Wang concert moment 01" />
+                </button>
+              </figure>
+
+              <figure class="gallery-card" data-column-lock="1" data-column-span="2">
+                <button
+                  class="gallery-open"
+                  type="button"
+                  data-lightbox-src="./assets/concert/Silence_wang/WSL_05.jpeg"
+                  data-lightbox-alt="Silence Wang concert moment 05"
+                >
+                  <img loading="lazy" decoding="async" src="./assets/concert/Silence_wang/WSL_05.jpeg" alt="Silence Wang concert moment 05" />
+                </button>
+              </figure>
+
+              <figure class="gallery-card" data-column-lock="1">
+                <button
+                  class="gallery-open"
+                  type="button"
+                  data-lightbox-src="./assets/concert/Silence_wang/WSL_02.jpeg"
+                  data-lightbox-alt="Silence Wang concert moment 02"
+                >
+                  <img loading="lazy" decoding="async" src="./assets/concert/Silence_wang/WSL_02.jpeg" alt="Silence Wang concert moment 02" />
+                </button>
+              </figure>
+
+
+
+
+              <figure class="gallery-card" data-column-lock="0">
+                <button
+                  class="gallery-open"
+                  type="button"
+                  data-lightbox-src="./assets/concert/Silence_wang/WSL_07.jpeg"
+                  data-lightbox-alt="Silence Wang concert moment 07"
+                >
+                  <img loading="lazy" decoding="async" src="./assets/concert/Silence_wang/WSL_07.jpeg" alt="Silence Wang concert moment 07" />
+                </button>
+              </figure>
+              <figure class="gallery-card">
+                <button
+                  class="gallery-open"
+                  type="button"
+                  data-lightbox-src="./assets/concert/Silence_wang/WSL_08.jpeg"
+                  data-lightbox-alt="Silence Wang concert moment 08"
+                >
+                  <img loading="lazy" decoding="async" src="./assets/concert/Silence_wang/WSL_08.jpeg" alt="Silence Wang concert moment 08" />
+                </button>
+              </figure>
+              <figure class="gallery-card" data-column-lock="0">
+                <button
+                  class="gallery-open"
+                  type="button"
+                  data-lightbox-src="./assets/concert/Silence_wang/WSL_06.jpeg"
+                  data-lightbox-alt="Silence Wang concert moment 06"
+                >
+                  <img loading="lazy" decoding="async" src="./assets/concert/Silence_wang/WSL_06.jpeg" alt="Silence Wang concert moment 06" />
+                </button>
+              </figure>
+              <figure class="gallery-card" data-column-lock="0">
+                <button
+                  class="gallery-open"
+                  type="button"
+                  data-lightbox-src="./assets/concert/Silence_wang/WSL_04.jpeg"
+                  data-lightbox-alt="Silence Wang concert moment 04"
+                >
+                  <img loading="lazy" decoding="async" src="./assets/concert/Silence_wang/WSL_04.jpeg" alt="Silence Wang concert moment 04" />
+                </button>
+              </figure>
+
+               <figure class="gallery-card" data-column-lock="1" data-column-span="2">
+                <button
+                  class="gallery-open"
+                  type="button"
+                  data-lightbox-src="./assets/concert/Silence_wang/WSL_03.jpeg"
+                  data-lightbox-alt="Silence Wang concert moment 03"
+                >
+                  <img loading="lazy" decoding="async" src="./assets/concert/Silence_wang/WSL_03.jpeg" alt="Silence Wang concert moment 03" />
+                </button>
+              </figure>
+
+            </div>
+          </section>
+          <section class="life-group concert-group">
+            <div class="life-group-head">
               <h3>G.E.M.</h3>
               <p class="life-group-meta">
                 <span class="meta-time">
@@ -1296,6 +1423,7 @@
       </figure>
     </div>
 
+    <script src="./life-language.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
